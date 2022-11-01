@@ -13,3 +13,6 @@ public class CounterServlet extends HttpServlet {
         response.getWriter().println("<h1>The count is " + counter + ".</h1>");
     }
 }
+
+
+
