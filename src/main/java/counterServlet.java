@@ -5,22 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "HelloWorld", urlPatterns = "/hello")
-public class HelloWorldServlet extends HttpServlet {
+@WebServlet(name = "CounterServlet", urlPatterns = "/count")
+public class counterServlet extends HttpServlet {
+    private int count;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        count += 1;
         res.setContentType("text/html");
-
-
-        int count = res.getBufferSize();
         PrintWriter out = res.getWriter();
-        String name = req.getParameter("name");
-        if (name == null){
-            out.println("<h1> Hello World<h1>");
-        }else {
-            out.println("<h1> Hello " + name + " <h1>");
 
+        if(req.getParameter("reset") != null && req.getParameter("reset").equals(true)){
+            count = 0;
         }
 
+        out.println("Count: "+ count);
     }
 }
